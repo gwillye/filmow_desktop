@@ -1,0 +1,2 @@
+Flask>=3.0
+# TMDB client uses urllib (standard library) — no extra dependency.
