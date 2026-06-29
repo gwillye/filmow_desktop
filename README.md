@@ -1,28 +1,33 @@
-# 🎬 Local Movie Catalog (Filmow-style, runs on your machine)
+# Local Movie Catalog (Filmow-style, runs on your machine)
 
-A personal movie catalog that **runs locally**, calls a **free public movie API** (TMDB) to find films, and organizes them into four lists — **Já vi / Quero ver / Quero rever / Favoritos** (seen / want-to-see / want-to-rewatch / favorites). Built because [filmow.com](https://filmow.com/@gwillye) became unusable (login hangs behind anti-bot protection), and a movie history shouldn't be locked away in an account you can't reach.
+A personal movie catalog that runs locally on your machine, calls a free public movie API (TMDB) to find films, and organizes them into four lists: Já vi / Quero ver / Quero rever / Favoritos (seen / want-to-see / want-to-rewatch / favorites).
 
-## ✨ Features
-- **Local web app** (Flask) — open it in the browser at `127.0.0.1:5000`, no account.
-- **Four lists** (filmow-style): seen, want-to-see, want-to-rewatch, favorites — a film can be in several.
-- **Search a free public API** (TMDB) when `TMDB_API_KEY` is set; **falls back to local search** offline.
-- **JSON-backed store** you own (CRUD, ratings 0–5, tags, notes, stats) + a CLI.
+I built this because [filmow.com](https://filmow.com/@gwillye) became unusable for me (login hangs behind anti-bot protection), and a movie history shouldn't be locked away in an account you can't reach anymore.
 
-## ▶️ Run it
+## Features
+
+- Local web app (Flask). Open it in the browser at `127.0.0.1:5000`, no account needed.
+- Four lists, filmow-style: seen, want-to-see, want-to-rewatch, favorites. A film can be in several at once.
+- Search a free public API (TMDB) when `TMDB_API_KEY` is set, with a fallback to local search when you're offline.
+- A JSON-backed store you own (CRUD, ratings 0-5, tags, notes, stats), plus a CLI.
+
+## Run it
+
 ```bash
 pip install -r requirements.txt
 
 # the local web app:
-python -m moviehistory.app          # → http://127.0.0.1:5000
+python -m moviehistory.app          # -> http://127.0.0.1:5000
 # (optional) online search:
-#   set TMDB_API_KEY=...   (free key from themoviedb.org)  — works offline without it
+#   set TMDB_API_KEY=...   (free key from themoviedb.org), works offline without it
 
 # or the CLI:
 python -m moviehistory.cli --db movies.json add "Parasite" --year 2019 --rating 4.5 --tag thriller
 python -m moviehistory.cli --db movies.json stats
 ```
 
-## 🗂️ Structure
+## Structure
+
 ```
 filmow-desktop/
 ├── moviehistory/
@@ -34,15 +39,19 @@ filmow-desktop/
 └── verify_app.py   # self-check for the lists + the web app (no server needed)
 ```
 
-## 🧪 Verified
-Both `python demo.py` and `python verify_app.py` run green:
-- `self-check: OK` (persistence, search, rate, filter, stats),
-- `flask app: OK` (home renders, add works, search responds).
+## Verified
 
-## 📌 Roadmap
-- Show **posters/synopsis** from TMDB on the cards; one-click "mark as watched / rewatch".
-- **Import** a Filmow/Letterboxd CSV export to migrate an existing history.
+Both `python demo.py` and `python verify_app.py` run green:
+
+- `self-check: OK` (persistence, search, rate, filter, stats)
+- `flask app: OK` (home renders, add works, search responds)
+
+## Roadmap
+
+- Show posters and synopsis from TMDB on the cards, with one-click "mark as watched / rewatch".
+- Import a Filmow/Letterboxd CSV export to migrate an existing history.
 - Package as a one-click desktop launcher.
 
-## 🛠️ Stack
-Python · Flask · TMDB API (optional) · standard-library JSON store
+## Stack
+
+Python, Flask, TMDB API (optional), standard-library JSON store.
